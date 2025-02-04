@@ -20,6 +20,7 @@ if (var3.getType().equals(this.soup.getType())) {
 }
 ``  
 4的实现如下（这个代码是反编译出来的）：  
+
 ``
 class KBListener$4 extends BukkitRunnable {
     KBListener$4(KBListener var1, Player var2) {
