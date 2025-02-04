@@ -4,13 +4,16 @@ import me.wazup.kitbattle.Kit;
 import me.wazup.kitbattle.Kitbattle;
 import me.wazup.kitbattle.PlayerData;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -40,8 +43,15 @@ public final class KitBattleSwordFix extends JavaPlugin implements Listener {
                     for (ItemStack kitItem : kitItems) {
                         boolean found = false;
                         for (ItemStack playerItem : playerItems) {
-                            if (kitItem.getType().toString().contains("STEW") || kitItem.getType().toString().contains("POTION") || kitItem.getType().toString().contains("ARROW"))
+                            if (playerItem == null || kitItem == null) return;
+                            if (playerItem.getType().toString().contains("STEW") || playerItem.getType().toString().contains("POTION") || playerItem.getType().toString().contains("ARROW")
+                                    || playerItem.getType().toString().contains("APPLE"))
                                 continue;
+                            if (kitItem.getType().toString().contains("STEW") || kitItem.getType().toString().contains("POTION") || kitItem.getType().toString().contains("ARROW")
+                                    || kitItem.getType().toString().contains("APPLE")) {
+                                found = true;
+                                break;
+                            }
                             if (playerItem.getType() == kitItem.getType()) {
                                 found = true;
                                 break;
@@ -49,6 +59,7 @@ public final class KitBattleSwordFix extends JavaPlugin implements Listener {
                         }
                         if (!found) {
                             p.getInventory().setItem(i, kitItem);
+                            p.sendMessage("FIXED " + kitItem.getType().toString());
                         }
                         i++;
                     }
@@ -65,6 +76,7 @@ public final class KitBattleSwordFix extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        HandlerList.unregisterAll((Plugin) this);
     }
 
 
