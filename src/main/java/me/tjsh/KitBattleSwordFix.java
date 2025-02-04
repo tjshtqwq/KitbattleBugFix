@@ -40,7 +40,7 @@ public final class KitBattleSwordFix extends JavaPlugin implements Listener {
                     for (ItemStack kitItem : kitItems) {
                         boolean found = false;
                         for (ItemStack playerItem : playerItems) {
-                            if (kitItem.getType().toString().contains("SOUP") || kitItem.getType().toString().contains("POTION") || kitItem.getType().toString().contains("ARROW"))
+                            if (kitItem.getType().toString().contains("STEW") || kitItem.getType().toString().contains("POTION") || kitItem.getType().toString().contains("ARROW"))
                                 continue;
                             if (playerItem.getType() == kitItem.getType()) {
                                 found = true;
