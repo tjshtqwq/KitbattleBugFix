@@ -28,49 +28,17 @@ public final class KitBattleSwordFix extends JavaPlugin implements Listener {
             @Override
             public void run() {
                 for (Player p : getServer().getOnlinePlayers()) {
-                    PlayerData data = Kitbattle.kitbattleApi.getPlayerData(p);
-                    if (data == null) return;
-                    Kit kit = data.getKit();
-                    if (kit == null) return;
-                    // if (kit.getItems()[0] == null) return;
-                    ItemStack firstKitItem = kit.getItems()[0];
-                    if (p.hasPermission("kbsf.debug")) {
-                        p.sendMessage("Kit " + firstKitItem.getType().toString());
-                    }
-                    ItemStack[] kitItems = kit.getItems();
-                    ItemStack[] playerItems = p.getInventory().getContents();
-                    int i = 0;
-                    for (ItemStack kitItem : kitItems) {
-                        boolean found = false;
-                        for (ItemStack playerItem : playerItems) {
-                            if (playerItem == null || kitItem == null) return;
-                            if (playerItem.getType().toString().contains("STEW") || playerItem.getType().toString().contains("POTION") || playerItem.getType().toString().contains("ARROW")
-                                    || playerItem.getType().toString().contains("APPLE"))
-                                continue;
-                            if (kitItem.getType().toString().contains("STEW") || kitItem.getType().toString().contains("POTION") || kitItem.getType().toString().contains("ARROW")
-                                    || kitItem.getType().toString().contains("APPLE")) {
-                                found = true;
-                                break;
-                            }
-                            if (playerItem.getType() == kitItem.getType()) {
-                                found = true;
-                                break;
+                    if (p.hasPermission("kbsf.fix")) {
+                        for (ItemStack i : p.getInventory().getContents()) {
+                            if (i.getType() == Material.BOWL) {
+                                p.getInventory().remove(i);
                             }
                         }
-                        if (!found) {
-                            p.getInventory().setItem(i, kitItem);
-                            p.sendMessage("FIXED " + kitItem.getType().toString());
-                        }
-                        i++;
                     }
                 }
             }
         };
         a.runTaskTimer(this, 0, 1);
-    }
-    @EventHandler
-    public void onDrop(PlayerDropItemEvent e) {
-        e.setCancelled(true);
     }
 
     @Override
