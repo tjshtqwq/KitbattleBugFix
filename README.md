@@ -34,4 +34,9 @@ class KBListener$4 extends BukkitRunnable {
 }
 ```   
 看懂了吧？setItemInHand(this.this$0.air)害死人呐！
-本插件代码非常狗屎，是一个临时修复方法。将就着用吧，我懒得解释了。
+本插件代码非常狗屎，是一个临时修复方法。将就着用吧，我懒得解释了。  
+# 使用方法：  
+1、确保你安装了KitBattle插件。
+2、安装此插件。
+3、更改KitBattle的配置文件：Soup-Auto-Disappear: true -> false
+4、给予玩家 kbsf.fix 权限
