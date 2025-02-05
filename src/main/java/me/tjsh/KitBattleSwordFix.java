@@ -32,7 +32,7 @@ public final class KitBattleSwordFix extends JavaPlugin implements Listener {
                     if (data == null) return;
                     Kit kit = data.getKit();
                     if (kit == null) return;
-                    if (kit.getItems()[0] == null) return;
+                    // if (kit.getItems()[0] == null) return;
                     ItemStack firstKitItem = kit.getItems()[0];
                     if (p.hasPermission("kbsf.debug")) {
                         p.sendMessage("Kit " + firstKitItem.getType().toString());
